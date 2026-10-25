@@ -1,5 +1,5 @@
 {
-  description = "Example nix-darwin system flake";
+  description = "Dinzann nix-darwin system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -14,45 +14,46 @@
       nixpkgs,
     }:
     let
-      configuration = { pkgs, ... }: {
-        # List packages installed in system profile. To search by name, run:
-        # $ nix-env -qaP | grep wget
-        nix.enable = false;
-        environment.systemPackages = [
-          # pkgs.vim
-          pkgs.nixfmt
-        ];
+      configuration =
+        { pkgs, ... }:
+        {
+          # Determinate Nix manages the daemon; leave nix-darwin's Nix module off.
+          nix.enable = false;
 
-        security.pam.services.sudo_local.touchIdAuth = true;
+          nixpkgs.hostPlatform = "aarch64-darwin";
 
-        # Necessary for using flakes on this system.
-        nix.settings.experimental-features = "nix-command flakes";
+          # Needed by homebrew.* and other user-scoped options.
+          system.primaryUser = "dinzann";
 
-        nix.settings.substituters = [
-          "https://mirrors.ustc.edu.cn/nix-channels/store"
-          "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
-          "https://cache.nixos.org/"
-        ];
+          environment.systemPackages = [
+            pkgs.nixfmt
+          ];
 
-        # Enable alternative shell support in nix-darwin.
-        # programs.fish.enable = true;
+          security.pam.services.sudo_local.touchIdAuth = true;
 
-        # Set Git commit hash for darwin-version.
-        system.configurationRevision = self.rev or self.dirtyRev or null;
+          nix.settings.experimental-features = "nix-command flakes";
 
-        # Used for backwards compatibility, please read the changelog before changing.
-        # $ darwin-rebuild changelog
-        system.stateVersion = 6;
+          nix.settings.substituters = [
+            "https://mirrors.ustc.edu.cn/nix-channels/store"
+            "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+            "https://cache.nixos.org/"
+          ];
 
-        # The platform the configuration will be used on.
-        nixpkgs.hostPlatform = "aarch64-darwin";
-      };
+          system.configurationRevision = self.rev or self.dirtyRev or null;
+
+          # Used for backwards compatibility, please read the changelog before changing.
+          # $ darwin-rebuild changelog
+          system.stateVersion = 6;
+        };
     in
     {
       # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#simple
+      # $ darwin-rebuild switch --flake ~/.config/nix-darwin#Dinzann
       darwinConfigurations."Dinzann" = nix-darwin.lib.darwinSystem {
-        modules = [ configuration ];
+        modules = [
+          configuration
+          ./modules/homebrew.nix
+        ];
       };
     };
 }
