@@ -13,6 +13,7 @@
 ├── flake.lock
 ├── modules/
 │   ├── homebrew.nix          # Homebrew taps / brews / casks
+│   ├── system-defaults.nix   # macOS 系统偏好（Dock / Finder / 触控板等）
 │   └── nix.custom.conf       # Determinate Nix 国内二进制缓存
 └── scripts/
     └── install-mirrors.sh    # 将 nix.custom.conf 安装到 /etc/nix/

@@ -51,6 +51,7 @@
         modules = [
           configuration
           ./modules/homebrew.nix
+          ./modules/system-defaults.nix
         ];
       };
     };
