@@ -4,7 +4,7 @@
     enable = true;
     onActivation = {
       cleanup = "uninstall";
-      autoUpdate = false;
+      autoUpdate = true;
       upgrade = true;
     };
 
@@ -13,7 +13,6 @@
     ];
 
     brews = [
-      "aria2"
       "bat"
       "bob"
       "btop"
