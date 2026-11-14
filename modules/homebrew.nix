@@ -4,7 +4,7 @@
     enable = true;
     onActivation = {
       cleanup = "uninstall";
-      autoUpdate = true;
+      autoUpdate = false;
       upgrade = true;
     };
 
