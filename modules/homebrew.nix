@@ -52,6 +52,7 @@
       "keycastr"
       "kitty"
       "omniwm"
+      "obsidian"
     ];
   };
 }
