@@ -10,6 +10,7 @@
 
     taps = [
       "go-musicfox/go-musicfox"
+      "chen08209/tap"
     ];
 
     brews = [
@@ -53,6 +54,7 @@
       "kitty"
       "omniwm"
       "obsidian"
+      "flclash"
     ];
   };
 }
