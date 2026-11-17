@@ -24,7 +24,7 @@
     NSGlobalDomain = {
       # Auto light/dark (follows time of day)
       AppleInterfaceStyleSwitchesAutomatically = true;
-      # Automatically hide and show the menu bar: On Desktop Only
+      # Automatically hide and show the menu bar: Always
       _HIHideMenuBar = true;
       KeyRepeat = 5;
       InitialKeyRepeat = 30;
@@ -68,11 +68,11 @@
     # Options without first-class nix-darwin attrs
     CustomUserPreferences = {
       NSGlobalDomain = {
-        AppleMenuBarVisibleInFullscreen = true; # show menu bar in fullscreen (pairs with _HIHideMenuBar)
+        AppleMenuBarVisibleInFullscreen = false; # hide menu bar in fullscreen too
         AppleMiniaturizeOnDoubleClick = false;
       };
       "com.apple.controlcenter" = {
-        AutoHideMenuBarOption = 1; # 1 = On Desktop Only
+        AutoHideMenuBarOption = 0; # 0 = Always
       };
     };
   };
