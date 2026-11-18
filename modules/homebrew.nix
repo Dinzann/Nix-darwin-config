@@ -9,8 +9,14 @@
     };
 
     taps = [
-      "go-musicfox/go-musicfox"
-      "chen08209/tap"
+      {
+        name = "go-musicfox/go-musicfox";
+        trusted = true;
+      }
+      {
+        name = "chen08209/tap";
+        trusted = true;
+      }
     ];
 
     brews = [
