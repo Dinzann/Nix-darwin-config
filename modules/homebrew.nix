@@ -61,6 +61,7 @@
       "omniwm"
       "obsidian"
       "flclash"
+      "libreoffice"
     ];
   };
 }
